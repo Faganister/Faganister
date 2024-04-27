@@ -59,10 +59,9 @@ app.put("/api/users/:id", (req,res) => {
   const userIndex = users.findIndex(item => item.id == req.params.id)
   if (userIndex>=0){
   users.splice(users.findIndex(item => item.id == req.params.id),1,{id:req.params.id,password:newPassword,username:newUsername,email:newEmail})
-  res.send("User has been changed:")
+  res.send("User has been changed")
 }else{
-  users.push(req.body)
-  res.send(`Пользователь с id ${req.params.id} создан`)
+  res.send(`Пользователя с таким id не существует`)
 }
 })
 
