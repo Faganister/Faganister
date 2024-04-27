@@ -17,22 +17,7 @@ app.post("/api/echo",(req,res)=>{
 })
 
 const users = []
-//Здесь сделал валидацию для избежания повторного создания пользователя, но не понимаю почему бросает typeError
-// app.post("/api/users", (req,res)=>{
-//   const {id, username, email, password} = req.body
-//   try{
-//   for (let i=0;i<=users.length+1;i++){
-//     if(users.length && users[i].id == id ){
-//       res.send("Пользователь с таким id уже существует")
-//     }else{
-//       users.push(req.body)
-//       res.send(`Пользователь с полями  id: ${id} username: ${username} email: ${email} password: ${password} создан`)
-//     }
-//   }
-//   }catch(error){
-//   // console.log(error.name);
-// }   
-// })
+//Здесь сделал валидацию для избежания повторного создания пользователя с одинаковым Id
 app.post("/api/users", (req,res)=>{
   const {id, username, email, password} = req.body
   try{
@@ -72,8 +57,13 @@ app.get("/api/users/:id", (req,res) => {
 app.put("/api/users/:id", (req,res) => {
   const {username: newUsername, email: newEmail, password: newPassword} = req.body
   const userIndex = users.findIndex(item => item.id == req.params.id)
+  if (userIndex>=0){
   users.splice(users.findIndex(item => item.id == req.params.id),1,{id:req.params.id,password:newPassword,username:newUsername,email:newEmail})
   res.send("User has been changed:")
+}else{
+  users.push(req.body)
+  res.send(`Пользователь с id ${req.params.id} создан`)
+}
 })
 
 //Изменение пароля конкретного пользователя
