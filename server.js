@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const PORT = 3000
+require("dotenv").config()
+const PORT = process.env.PORT
+
 app.use(express.json());
 // Создать маршрут для обработки HTTP GET-запроса по пути /api/hello, который возвращает простое сообщение "Привет, Redev!".
 app.get('/api/hello', (req, res) => {
@@ -44,6 +46,7 @@ app.post("/api/users", (req,res)=>{
 
 app.get("/api/users", (req,res)=>{
   res.send(users)
+  
 })
 
 //поиск юзера по id
