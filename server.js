@@ -4,6 +4,13 @@ require("dotenv").config()
 const PORT = process.env.PORT
 
 app.use(express.json());
+
+function logger(req, res, next) {
+  console.log(`Запрос на ${req.url}`);
+  next();
+}
+
+app.use(logger);
 // Создать маршрут для обработки HTTP GET-запроса по пути /api/hello, который возвращает простое сообщение "Привет, Redev!".
 app.get('/api/hello', (req, res) => {
   console.log("Тебе консольный привет");
