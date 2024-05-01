@@ -3,14 +3,16 @@ const express = require("express")
 const router = express.Router() 
 
 const userControllers = require("../controllers/usersControllers")
-router.get("/", userControllers.getUsers)
+router.get("/",userControllers.userLogger, userControllers.getUsers)
 
-router.get("/:id", userControllers.getUser)
+router.get("/:id",userControllers.userLogger, userControllers.getUser)
 
-router.post("/", userControllers.postUser)
+router.post("/",userControllers.userLogger, userControllers.postUser)
 
-router.put("/", userControllers.putUser)
+router.put("/:id",userControllers.userLogger, userControllers.putUser)
 
-router.delete("/:id", userControllers.deleteUser)
+router.patch("/:id",userControllers.userLogger, userControllers.patchUser)
+
+router.delete("/:id",userControllers.userLogger, userControllers.deleteUser)
 
 module.exports = router
