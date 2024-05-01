@@ -10,9 +10,6 @@ app.use(express.json());
 
 app.use("/api", router)
 
-const users = []
-
-
 app.listen(PORT, () => {
   console.log(`Сервер запущен на http://localhost:${PORT}`);
 })
